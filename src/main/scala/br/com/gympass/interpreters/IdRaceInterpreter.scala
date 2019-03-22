@@ -4,7 +4,7 @@ import br.com.gympass.adt._
 import cats.~>
 import cats.Id
 
-object OptionRaceInterpreter extends (RaceOp ~> Id) {
+object IdRaceInterpreter extends (Race ~> Id) {
 
-  override def apply[A](fa: RaceOp[A]): Id[A] = ???
+  override def apply[A](fa: Race[A]): Id[A] = ???
 }

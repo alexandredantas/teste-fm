@@ -3,7 +3,7 @@ package br.com.gympass
 import java.time.LocalTime
 
 import br.com.gympass.adt._
-import br.com.gympass.adt.RaceOp
+import br.com.gympass.interpreters._
 import cats.free.Free
 import cats.Id
 import cats.implicits._
@@ -15,12 +15,15 @@ object Main extends App {
 
   override def main(args: Array[String]): Unit = {
 
-    implicit val a = RaceOp.create[Id]
-    evaluateRace("asda")
+
+
+    val a = evaluateRace("asda")
+
+    a.foldMap(idInterpreter)
 
   }
 
-  private def evaluateRace[F[_]](raceResultFile: String)(implicit raceOp: RaceOp[F]): Free[F,
+  private def evaluateRace(raceResultFile: String)(implicit raceOp: RaceOp[Id]): Free[Id,
     (Pilot, (Pilot, LocalTime), Map[Pilot, LocalTime], Map[Pilot, LocalTime])] = {
 
     import raceOp._

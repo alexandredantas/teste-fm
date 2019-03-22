@@ -8,7 +8,6 @@ import cats.free.Free._
 
 import scala.language.higherKinds
 
-
 sealed case class Pilot(code: String, name: String)
 sealed case class Grid(hour: LocalTime, pilot: Pilot, lap: Int, lapTime: LocalTime, avgSpeed: BigDecimal)
 

@@ -5,8 +5,6 @@ import java.time.LocalTime
 import br.com.gympass.adt._
 import br.com.gympass.interpreters._
 import cats.free.Free
-import cats.Id
-import cats.implicits._
 
 import scala.language.higherKinds
 
@@ -15,15 +13,14 @@ object Main extends App {
 
   override def main(args: Array[String]): Unit = {
 
+    import br.com.gympass.adt.RaceOp._
 
+    val a = evaluateRace("asda").foldMap(idInterpreter)
 
-    val a = evaluateRace("asda")
-
-    a.foldMap(idInterpreter)
 
   }
 
-  private def evaluateRace(raceResultFile: String)(implicit raceOp: RaceOp[Id]): Free[Id,
+  private def evaluateRace(raceResultFile: String)(implicit raceOp: RaceOp[Program]): Free[Program,
     (Pilot, (Pilot, LocalTime), Map[Pilot, LocalTime], Map[Pilot, LocalTime])] = {
 
     import raceOp._

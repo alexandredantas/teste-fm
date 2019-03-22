@@ -1,8 +1,7 @@
 package br.com.gympass.interpreters
 
 import br.com.gympass.adt._
-import cats.~>
-import cats.Id
+import cats.{Id, ~>}
 
 object IdRaceInterpreter extends (Race ~> Id) {
 

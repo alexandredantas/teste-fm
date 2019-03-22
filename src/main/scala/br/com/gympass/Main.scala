@@ -5,6 +5,7 @@ import java.time.LocalTime
 import br.com.gympass.adt._
 import br.com.gympass.interpreters._
 import cats.free.Free
+import cats.{Id, ~>}
 
 import scala.language.higherKinds
 
@@ -13,9 +14,11 @@ object Main extends App {
 
   override def main(args: Array[String]): Unit = {
 
-    import br.com.gympass.adt.RaceOp._
+    val interpreter: Program ~> Id = IdDummyInterpreter or IdRaceInterpreter
 
-    val a = evaluateRace("asda").foldMap(idInterpreter)
+    val (pilot, (bestPilot, bestLap), average, timeAfter) = evaluateRace("asda").foldMap(interpreter)
+
+
 
 
   }
